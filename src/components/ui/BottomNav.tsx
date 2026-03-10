@@ -8,42 +8,40 @@ const navItems = [
     label: "Home",
     href: "/home",
     icon: (active: boolean) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#7c3aed" : "#94a3b8"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-        <polyline points="9,22 9,12 15,12 15,22"/>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "currentColor" : "rgba(195,201,221,0.72)"} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 10.5L12 3l9 7.5" />
+        <path d="M5.5 10v9.5h13V10" />
+        <path d="M10 19.5v-5h4v5" />
       </svg>
     ),
   },
   {
-    label: "Dashboard",
+    label: "Insights",
     href: "/dashboard",
     icon: (active: boolean) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#7c3aed" : "#94a3b8"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="9" rx="1"/>
-        <rect x="14" y="3" width="7" height="5" rx="1"/>
-        <rect x="14" y="12" width="7" height="9" rx="1"/>
-        <rect x="3" y="16" width="7" height="5" rx="1"/>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "currentColor" : "rgba(195,201,221,0.72)"} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 20V10" />
+        <path d="M12 20V4" />
+        <path d="M19 20v-7" />
       </svg>
     ),
   },
   {
-    label: "AI Chat",
+    label: "Lucky",
     href: "/chat",
     icon: (active: boolean) => (
-      <div className={`p-2 rounded-2xl transition-all duration-200 ${active ? "gradient-primary shadow-purple" : ""}`}>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#ffffff" : "#94a3b8"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-        </svg>
-      </div>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "currentColor" : "rgba(195,201,221,0.72)"} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 7.5A3.5 3.5 0 0 1 9.5 4H14a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H9l-3 2v-4.2A3.5 3.5 0 0 1 6 14.5z" />
+      </svg>
     ),
   },
   {
     label: "Profile",
     href: "/profile",
     icon: (active: boolean) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#7c3aed" : "#94a3b8"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "currentColor" : "rgba(195,201,221,0.72)"} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M5 20c1.8-3 4.15-4.5 7-4.5S17.2 17 19 20" />
       </svg>
     ),
   },
@@ -53,22 +51,14 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="absolute bottom-0 left-0 right-0 flex items-center justify-around px-2 py-2 bg-white/90 backdrop-blur-lg border-t border-purple-100/50">
+    <nav className="nav-floating">
       {navItems.map((item) => {
         const isActive = pathname === item.href || pathname?.startsWith(item.href + "/");
+
         return (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="flex flex-col items-center gap-0.5 py-1 px-3 relative transition-all duration-200"
-          >
-            {item.icon(!!isActive)}
-            <span
-              className="text-[11px] font-medium transition-colors"
-              style={{ color: isActive ? "#7c3aed" : "#94a3b8" }}
-            >
-              {item.label}
-            </span>
+          <Link key={item.href} href={item.href} className={`nav-item ${isActive ? "active" : ""}`}>
+            {item.icon(Boolean(isActive))}
+            <span className="text-[11px] font-semibold tracking-[0.08em]">{item.label}</span>
           </Link>
         );
       })}

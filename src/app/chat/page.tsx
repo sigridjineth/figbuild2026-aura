@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import PhoneStatusBar from "@/components/ui/PhoneStatusBar";
 import BottomNav from "@/components/ui/BottomNav";
@@ -15,153 +15,118 @@ const initialMessages: Message[] = [
   {
     id: 1,
     sender: "bot",
-    text: "Hi Sarah! \u{1F44B} I noticed your stress levels have been moderate today. How are you feeling right now?",
+    text: "Hi Alex — I’m noticing a gentle rise in your breathing cadence. Want to regulate before it turns into mental noise?",
   },
   {
     id: 2,
     sender: "user",
-    text: "I've been feeling a bit anxious about my presentation tomorrow.",
+    text: "Yes. I feel scattered, but not fully overwhelmed yet.",
   },
   {
     id: 3,
     sender: "bot",
-    text: "That's completely understandable. Presentation anxiety is very common. Let me suggest a few things that might help:\n\n1. \u{1F9D8} Try a 5-minute breathing exercise\n2. \u{1F4DD} Write down your key points\n3. \u{1F3B5} Listen to calming music\n\nWould you like to try any of these?",
-  },
-  {
-    id: 4,
-    sender: "user",
-    text: "The breathing exercise sounds good!",
-  },
-  {
-    id: 5,
-    sender: "bot",
-    text: "Great choice! I'll guide you through a simple box breathing technique. Ready when you are! \u{1FAC1}",
+    text: "That’s the perfect moment to intervene. We can do a 90-second reset, a verbal grounding loop, or a tiny plan for the next hour.",
   },
 ];
+
+const quickReplies = ["Start a 90-second reset", "Help me refocus", "What triggered this?"];
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = () => {
-    const trimmed = input.trim();
+  const submit = (value = input) => {
+    const trimmed = value.trim();
     if (!trimmed) return;
 
-    const userMsg: Message = {
-      id: Date.now(),
-      sender: "user",
-      text: trimmed,
-    };
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => [...prev, { id: Date.now(), sender: "user", text: trimmed }]);
     setInput("");
 
-    setTimeout(() => {
-      const botMsg: Message = {
-        id: Date.now() + 1,
-        sender: "bot",
-        text: "I hear you! Let me think about that and get back to you with some personalized suggestions. \u{1F418}",
-      };
-      setMessages((prev) => [...prev, botMsg]);
-    }, 1000);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleSend();
-    }
+    window.setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: "bot",
+          text: "I’m with you. Let’s make the next minute easier, not perfect. Start by unclenching your jaw and giving your exhale two extra beats.",
+        },
+      ]);
+    }, 850);
   };
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="app-surface h-full overflow-hidden">
       <PhoneStatusBar />
 
-      {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-100 flex items-center gap-3">
-        <Link href="/home" className="flex items-center justify-center w-8 h-8 -ml-1">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </Link>
-        <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center flex-shrink-0">
-          <span className="text-lg">{"\u{1F418}"}</span>
+      <div className="flex h-[calc(100%-42px)] flex-col">
+        <div className="px-5 pb-4 pt-2">
+          <div className="panel flex items-center gap-3 rounded-[28px] px-4 py-4">
+            <Link href="/home" className="pill flex h-10 w-10 items-center justify-center rounded-full text-white/76">
+              ←
+            </Link>
+            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/8 bg-white/[0.04] text-2xl">
+              🐘
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-white">Lucky</p>
+              <p className="text-xs text-[#9cf1cc]">Live regulation mode · tuned to your current pattern</p>
+            </div>
+          </div>
         </div>
-        <div className="flex-1 min-w-0">
-          <h1 className="text-base font-bold text-[#1a1a2e] leading-tight">AI Assistant</h1>
-          <p className="text-xs text-[#94a3b8]">Lucky is here to help</p>
-        </div>
-      </div>
 
-      {/* Chat messages area with gradient background */}
-      <div className="flex-1 overflow-y-auto gradient-chat-bg" style={{ paddingBottom: "76px" }}>
-        <div className="px-4 py-4 space-y-4">
-          {messages.map((msg) =>
-            msg.sender === "bot" ? (
-              <div key={msg.id} className="flex items-start gap-2.5 animate-fade-in-up">
-                <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-sm">{"\u{1F418}"}</span>
-                </div>
-                <div className="bg-white rounded-2xl px-4 py-3 max-w-[78%] shadow-card">
-                  <p className="text-sm text-[#1a1a2e] whitespace-pre-line leading-relaxed">{msg.text}</p>
-                </div>
-              </div>
-            ) : (
-              <div key={msg.id} className="flex justify-end animate-fade-in-up">
-                <div className="gradient-primary rounded-2xl px-4 py-3 max-w-[78%] shadow-purple">
-                  <p className="text-sm text-white whitespace-pre-line leading-relaxed">{msg.text}</p>
-                </div>
-              </div>
-            )
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-      </div>
+        <div className="flex-1 overflow-y-auto px-5 pb-[190px]">
+          <div className="space-y-4">
+            <div className="fade-up rounded-[24px] border border-white/8 bg-white/[0.03] px-4 py-3 text-sm text-white/70">
+              Your last three successful interventions: slower exhale, naming the next task, and stepping out of your chair.
+            </div>
 
-      {/* Input area — sits above the bottom nav */}
-      <div className="absolute bottom-[56px] left-0 right-0 px-4 py-3 bg-white border-t border-gray-100 flex items-center gap-3">
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type your message..."
-            className="w-full bg-[#f1f0fb] rounded-full pl-4 pr-10 py-3 text-sm outline-none placeholder-[#94a3b8] text-[#1a1a2e]"
-          />
-          {/* Microphone icon inside input */}
-          <button className="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#7c3aed] transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="9" y="1" width="6" height="11" rx="3" />
-              <path d="M19 10v2a7 7 0 01-14 0v-2" />
-              <line x1="12" y1="19" x2="12" y2="23" />
-              <line x1="8" y1="23" x2="16" y2="23" />
-            </svg>
-          </button>
+            {messages.map((message) => (
+              <div key={message.id} className={`fade-up flex ${message.sender === "user" ? "justify-end" : "items-start gap-3"}`}>
+                {message.sender === "bot" && (
+                  <div className="mt-1 flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.05] text-base">🐘</div>
+                )}
+                <div className={message.sender === "bot" ? "chat-bot" : "chat-user"}>{message.text}</div>
+              </div>
+            ))}
+
+            <div className="grid gap-2">
+              {quickReplies.map((reply) => (
+                <button
+                  key={reply}
+                  type="button"
+                  onClick={() => submit(reply)}
+                  className="pill rounded-full px-4 py-3 text-left text-sm text-white/72"
+                >
+                  {reply}
+                </button>
+              ))}
+            </div>
+
+            <div ref={endRef} />
+          </div>
         </div>
-        {/* Send button */}
-        <button
-          onClick={handleSend}
-          className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 shadow-purple transition-transform active:scale-95"
-          style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7)" }}
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-          </svg>
-        </button>
+
+        <div className="absolute bottom-[104px] left-4 right-4 z-10 rounded-[30px] border border-white/8 bg-[#0b101b]/88 p-4 shadow-[0_18px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+          <div className="field-shell min-h-[56px]">
+            <input
+              className="field-input"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") submit();
+              }}
+              placeholder="Tell Lucky what you’re feeling or what’s coming next…"
+            />
+            <button onClick={() => submit()} className="cta-primary h-11 min-w-11 px-4 text-sm">
+              Send
+            </button>
+          </div>
+        </div>
       </div>
 
       <BottomNav />

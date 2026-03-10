@@ -5,116 +5,106 @@ import PhoneStatusBar from "@/components/ui/PhoneStatusBar";
 
 export default function SignupPage() {
   return (
-    <div className="relative h-full bg-[#f8f7ff]">
+    <div className="app-surface h-full overflow-hidden">
+      <div className="floating-orb left-[-28px] top-20 h-24 w-24 bg-[#7f6bff]/40" />
+      <div className="floating-orb right-6 top-28 h-16 w-16 bg-[#9cf1cc]/35" style={{ animationDelay: "1.4s" }} />
       <PhoneStatusBar />
 
-      <div className="px-6 py-4 overflow-y-auto" style={{ height: "calc(100% - 44px)" }}>
-        <div className="space-y-5">
-          {/* Elephant avatar */}
-          <div className="flex flex-col items-center pt-2 opacity-0 animate-fade-in-up stagger-1">
-            <div
-              className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
-              style={{ background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #a855f7 100%)" }}
-            >
-              🐘
-            </div>
-            <h1 className="text-xl font-bold text-[#1a1a2e] mt-3">Welcome to SafeSpace</h1>
-            <p className="text-sm text-[#64748b] mt-1">Your AI-powered stress regulation assistant</p>
-          </div>
-
-          {/* Pill tab switcher */}
-          <div className="bg-[#f1f0fb] rounded-full p-1 flex gap-1 opacity-0 animate-fade-in-up stagger-2">
-            <div
-              className="flex-1 text-center py-2 px-6 rounded-full text-sm font-semibold text-white"
-              style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}
-            >
-              Sign Up
-            </div>
-            <Link
-              href="/login"
-              className="flex-1 text-center py-2 px-6 rounded-full text-sm font-semibold text-[#64748b]"
-            >
-              Log In
-            </Link>
-          </div>
-
-          {/* Form */}
-          <div className="space-y-4 opacity-0 animate-fade-in-up stagger-3">
-            <div>
-              <label className="block text-sm font-medium text-[#64748b] mb-1.5">Full Name</label>
-              <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base">👤</span>
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="input-field"
-                />
+      <div className="page-scroll safe-area-bottom relative space-y-6">
+        <div className="space-y-3 fade-up">
+          <span className="eyebrow">SafeSpace access</span>
+          <div className="panel-strong hero-gradient rounded-[30px] p-5">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Begin softly</p>
+                <h1 className="display-font mt-3 text-[2rem] leading-[1.02] text-gradient">
+                  Build your calm before the spiral arrives.
+                </h1>
+                <p className="helper-copy mt-3 max-w-[15rem]">
+                  SafeSpace helps you catch stress signals early, then turns them into quieter choices, steadier days, and rituals that actually stick.
+                </p>
               </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#64748b] mb-1.5">Email</label>
-              <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base">📧</span>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="input-field"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#64748b] mb-1.5">Password</label>
-              <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base">🔒</span>
-                <input
-                  type="password"
-                  placeholder="Create a password"
-                  className="input-field"
-                />
+              <div className="panel rounded-[26px] px-4 py-4 text-center">
+                <div className="text-4xl">🐘</div>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#9cf1cc]">Lucky</p>
+                <p className="mt-1 text-[11px] text-white/60">Your companion</p>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Create Account button */}
-          <Link
-            href="/onboarding/step1"
-            className="block w-full py-3.5 bg-[#1a1a2e] text-white rounded-2xl font-semibold text-base text-center opacity-0 animate-fade-in-up stagger-4"
-            style={{ boxShadow: "0 4px 12px rgba(26, 26, 46, 0.15)" }}
-          >
-            Create Account
+        <div className="tab-rail fade-up" style={{ animationDelay: "80ms" }}>
+          <div className="tab-active">Create account</div>
+          <Link href="/login" className="tab-idle">
+            Log in
           </Link>
+        </div>
 
-          {/* Divider */}
-          <div className="flex items-center gap-3 opacity-0 animate-fade-in-up stagger-5">
-            <div className="flex-1 h-px bg-gray-200" />
-            <span className="text-xs text-[#94a3b8]">Or continue with</span>
-            <div className="flex-1 h-px bg-gray-200" />
+        <div className="panel rounded-[30px] p-5 fade-up" style={{ animationDelay: "120ms" }}>
+          <div className="mb-5 flex items-center justify-between">
+            <div>
+              <p className="text-sm font-semibold text-white">Set up your SafeSpace</p>
+              <p className="helper-copy mt-1">This takes less than a minute.</p>
+            </div>
+            <div className="rounded-full border border-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
+              private by default
+            </div>
           </div>
 
-          {/* Social buttons */}
-          <div className="flex gap-3 opacity-0 animate-fade-in-up stagger-5">
-            <button className="flex-1 flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-2xl py-3 shadow-sm">
-              <svg width="20" height="20" viewBox="0 0 24 24">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-              </svg>
-              <span className="text-sm font-medium text-[#1a1a2e]">Google</span>
-            </button>
-            <button className="flex-1 flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-2xl py-3 shadow-sm">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a2e">
-                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-              </svg>
-              <span className="text-sm font-medium text-[#1a1a2e]">Apple</span>
-            </button>
+          <div className="space-y-3.5">
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Full name</span>
+              <div className="field-shell">
+                <span className="text-lg">✦</span>
+                <input className="field-input" type="text" placeholder="How should we address you?" />
+              </div>
+            </label>
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Email</span>
+              <div className="field-shell">
+                <span className="text-lg">⌁</span>
+                <input className="field-input" type="email" placeholder="name@email.com" />
+              </div>
+            </label>
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Password</span>
+              <div className="field-shell">
+                <span className="text-lg">◌</span>
+                <input className="field-input" type="password" placeholder="Choose something memorable" />
+              </div>
+            </label>
           </div>
 
-          {/* Terms text */}
-          <p className="text-center text-xs text-[#94a3b8] pb-4 opacity-0 animate-fade-in-up stagger-6">
-            By continuing, you agree to our{" "}
-            <span className="text-[#7c3aed] underline">Terms of Service</span> and{" "}
-            <span className="text-[#7c3aed] underline">Privacy Policy</span>
+          <div className="mt-5 rounded-[24px] border border-white/8 bg-white/[0.03] p-4">
+            <p className="text-sm font-semibold text-white">Your first week includes</p>
+            <div className="mt-3 grid grid-cols-2 gap-3 text-sm text-white/74">
+              <div className="rounded-[20px] bg-white/[0.03] px-3 py-3">• early stress forecast</div>
+              <div className="rounded-[20px] bg-white/[0.03] px-3 py-3">• calm rituals matched to context</div>
+              <div className="rounded-[20px] bg-white/[0.03] px-3 py-3">• private companion chat</div>
+              <div className="rounded-[20px] bg-white/[0.03] px-3 py-3">• gentle onboarding with Lucky</div>
+            </div>
+          </div>
+
+          <Link href="/onboarding/step1" className="cta-primary mt-5 w-full">
+            Continue into onboarding
+          </Link>
+        </div>
+
+        <div className="space-y-3 fade-up" style={{ animationDelay: "180ms" }}>
+          <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-white/40">
+            <div className="h-px flex-1 bg-white/8" />
+            or continue with
+            <div className="h-px flex-1 bg-white/8" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <button className="cta-secondary">Google</button>
+            <button className="cta-secondary">Apple</button>
+          </div>
+          <p className="text-center text-sm text-white/56">
+            Already with us?{" "}
+            <Link href="/login" className="font-semibold text-[#9cf1cc]">
+              Enter SafeSpace
+            </Link>
           </p>
         </div>
       </div>

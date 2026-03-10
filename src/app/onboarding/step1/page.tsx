@@ -5,116 +5,78 @@ import PhoneStatusBar from "@/components/ui/PhoneStatusBar";
 
 export default function OnboardingStep1Page() {
   return (
-    <div className="relative h-full bg-[#f8f7ff]">
+    <div className="app-surface h-full overflow-hidden">
       <PhoneStatusBar />
+      <div className="page-scroll safe-area-bottom space-y-5">
+        <div className="flex items-center justify-between fade-up">
+          <Link href="/signup" className="pill rounded-full px-4 py-2 text-sm text-white/76">
+            ← Back
+          </Link>
+          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/45">Step 1 / 5</span>
+        </div>
+        <div className="progress-track fade-up" style={{ animationDelay: "60ms" }}>
+          <div className="progress-bar w-[20%]" />
+        </div>
 
-      <div className="px-6 py-4 overflow-y-auto" style={{ height: "calc(100% - 44px)" }}>
-        <div className="space-y-4">
-          {/* Header */}
-          <div className="flex items-center opacity-0 animate-fade-in-up stagger-1">
-            <Link
-              href="/signup"
-              className="w-10 h-10 rounded-full bg-white shadow-card flex items-center justify-center text-[#1a1a2e]"
-            >
-              &larr;
-            </Link>
-            <span className="flex-1 text-center text-sm font-medium text-[#64748b]">
-              Step 1 of 5
-            </span>
-            <div className="w-10" />
-          </div>
+        <div className="panel-strong rounded-[30px] p-5 fade-up" style={{ animationDelay: "100ms" }}>
+          <span className="eyebrow">Profile calibration</span>
+          <h1 className="display-font mt-3 text-[2rem] leading-[1.04] text-white">What should Lucky know about you first?</h1>
+          <p className="helper-copy mt-3">We only ask for what helps SafeSpace feel personal, respectful, and more accurate from day one.</p>
+        </div>
 
-          {/* Progress bar */}
-          <div className="h-2.5 bg-gray-200 rounded-full opacity-0 animate-fade-in-up stagger-1">
-            <div className="w-[20%] h-full gradient-progress rounded-full" />
-          </div>
-
-          {/* Icon and title */}
-          <div className="flex flex-col items-center pt-2 opacity-0 animate-fade-in-up stagger-2">
-            <div className="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center text-2xl">
-              👤
-            </div>
-            <h1 className="text-xl font-bold text-[#1a1a2e] mt-3">Personal Information</h1>
-            <p className="text-sm text-[#64748b] mt-1">Tell us about yourself</p>
-          </div>
-
-          {/* Form */}
-          <div className="space-y-4 opacity-0 animate-fade-in-up stagger-3">
-            <div>
-              <label className="block text-sm font-medium text-[#1a1a2e] mb-1.5">Full Name</label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base">👤</span>
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="input-field"
-                />
+        <div className="panel rounded-[30px] p-5 fade-up" style={{ animationDelay: "140ms" }}>
+          <div className="space-y-4">
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Preferred name</span>
+              <div className="field-shell">
+                <span>✦</span>
+                <input className="field-input" type="text" placeholder="Alex Morgan" />
               </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1a1a2e] mb-1.5">Date of Birth</label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base">📅</span>
-                <input
-                  type="date"
-                  className="input-field"
-                />
+            </label>
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Date of birth</span>
+              <div className="field-shell">
+                <span>◴</span>
+                <input className="field-input" type="date" />
               </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1a1a2e] mb-1.5">Gender</label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base">⚧</span>
-                <select className="input-field appearance-none">
-                  <option value="" disabled selected>
-                    Select gender
+            </label>
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Identity</span>
+              <div className="field-shell">
+                <span>◎</span>
+                <select className="field-select appearance-none" defaultValue="">
+                  <option value="" disabled>
+                    Choose what fits best
                   </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="non-binary">Non-binary</option>
-                  <option value="prefer-not">Prefer not to say</option>
+                  <option>Woman</option>
+                  <option>Man</option>
+                  <option>Non-binary</option>
+                  <option>Prefer not to say</option>
                 </select>
               </div>
-            </div>
+            </label>
           </div>
 
-          <div className="space-y-4 opacity-0 animate-fade-in-up stagger-4">
-            <div>
-              <label className="block text-sm font-medium text-[#1a1a2e] mb-1.5">Height</label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base">📏</span>
-                <input
-                  type="text"
-                  placeholder="e.g., 5'10&quot; or 178 cm"
-                  className="input-field"
-                />
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Height</span>
+              <div className="field-shell">
+                <span>↕</span>
+                <input className="field-input" type="text" placeholder="170 cm" />
               </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#1a1a2e] mb-1.5">Weight</label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base">⚖️</span>
-                <input
-                  type="text"
-                  placeholder="e.g., 160 lbs or 73 kg"
-                  className="input-field"
-                />
+            </label>
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-white/82">Weight</span>
+              <div className="field-shell">
+                <span>◌</span>
+                <input className="field-input" type="text" placeholder="65 kg" />
               </div>
-            </div>
+            </label>
           </div>
 
-          {/* Continue button */}
-          <div className="opacity-0 animate-fade-in-up stagger-5">
-            <Link
-              href="/onboarding/step2"
-              className="block w-full py-3.5 bg-[#1a1a2e] text-white rounded-2xl font-semibold text-base text-center shadow-lg"
-            >
-              Continue
-            </Link>
-          </div>
-
-          {/* Bottom spacer */}
-          <div className="h-4" />
+          <Link href="/onboarding/step2" className="cta-primary mt-5 w-full">
+            Continue
+          </Link>
         </div>
       </div>
     </div>

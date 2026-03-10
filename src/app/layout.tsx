@@ -1,24 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const fraunces = Fraunces({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["600", "700"],
+});
+
+const manrope = Manrope({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "SafeSpace — AI Stress Regulation Assistant",
-  description: "SafeSpace is your AI-powered stress regulation assistant with Lucky the elephant.",
+  title: "SafeSpace — anticipatory calm for modern life",
+  description:
+    "SafeSpace helps you notice stress earlier, regulate with confidence, and build calmer daily rituals with Lucky by your side.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: "#ffffff",
+  themeColor: "#090d16",
 };
 
 export default function RootLayout({
@@ -28,8 +33,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
-        <div className="flex items-center justify-center min-h-screen p-4" style={{ background: "#f3f4f6" }}>
+      <body className={`${fraunces.variable} ${manrope.variable} antialiased`}>
+        <div className="phone-stage">
           <div className="phone-frame">{children}</div>
         </div>
       </body>

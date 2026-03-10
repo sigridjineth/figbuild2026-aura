@@ -1,46 +1,28 @@
-// Aura Design System — FigBuild 2026
-// Vibrant gradients, soft lavender backgrounds, purple accent. Matches Figma exactly.
+// SafeSpace Design System — moonlit sanctuary edition
 
 export const colors = {
-  background: '#f8f7ff',
-  surface: '#ffffff',
-  surfaceElevated: '#ffffff',
-  border: '#e9e5f5',
-  softBg: '#f1f0fb',
-
-  primary: '#1a1a2e',
-  accent: '#7c3aed',
-  accentLight: '#ede9fe',
-  accentBg: '#8b5cf6',
-  link: '#9810fa',
-
-  gradientStart: '#4f46e5',
-  gradientMid: '#7c3aed',
-  gradientEnd: '#a855f7',
-
-  textPrimary: '#1a1a2e',
-  textSecondary: '#64748b',
-  textMuted: '#94a3b8',
-  textWhite: '#ffffff',
-
-  stressLow: '#22c55e',
-  stressMedium: '#eab308',
-  stressHigh: '#ef4444',
-
-  relaxGradient: ['#3b82f6', '#06b6d4'],
-  regulationGradient: ['#ec4899', '#a855f7'],
-  chatGradient: ['#10b981', '#14b8a6'],
+  background: "#090d16",
+  surface: "rgba(14, 19, 31, 0.78)",
+  surfaceStrong: "rgba(20, 27, 44, 0.94)",
+  border: "rgba(255,255,255,0.08)",
+  textPrimary: "#f6f7fb",
+  textSecondary: "#c3c9dd",
+  textMuted: "#8690ac",
+  mint: "#99f0c7",
+  lilac: "#b7a2ff",
+  peach: "#ffc58f",
+  rose: "#ff8ab3",
 } as const;
 
 export const typography = {
-  fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+  display: "var(--font-display)",
+  body: "var(--font-body)",
 } as const;
 
 export const shadows = {
-  card: '0 2px 12px rgba(124, 58, 237, 0.06), 0 1px 3px rgba(0,0,0,0.04)',
-  cardHover: '0 8px 25px rgba(124, 58, 237, 0.12), 0 2px 6px rgba(0,0,0,0.04)',
-  purple: '0 4px 20px rgba(139, 92, 246, 0.25)',
-  button: '0 4px 15px rgba(139, 92, 246, 0.3)',
+  panel: "0 18px 40px rgba(0,0,0,0.24)",
+  glow: "0 24px 50px rgba(118, 92, 255, 0.16)",
+  button: "0 16px 30px rgba(153, 240, 199, 0.2)",
 } as const;
 
-export type LuckyExpression = 'smiling' | 'sad' | 'crying' | 'mad';
+export type LuckyExpression = "smiling" | "sad" | "crying" | "mad";
