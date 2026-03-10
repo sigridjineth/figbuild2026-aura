@@ -1,9 +1,39 @@
-node_modules/
-.next/
-out/
-.DS_Store
-*.tsbuildinfo
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# build outputs
+/.next/
+/out/
+/build
+/coverage
+
+# environment
 .env
 .env.local
+.env*
+
+# misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+next-env.d.ts
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# vercel
+.vercel
+
+# local tooling
 .omc/
 .claude/
